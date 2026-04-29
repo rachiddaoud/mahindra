@@ -1,6 +1,7 @@
 package com.mahindra.tech.error;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,10 +15,8 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ) {
         return ResponseEntity
-                .status(500)
+                .status(HttpStatus.NOT_FOUND)
                 .body(Map.of(
-                        "status", "500",
-                        "error", "Internal Server Error",
                         "message", ex.getMessage(),
                         "path", request.getRequestURI()
                 ));
