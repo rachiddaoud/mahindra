@@ -20,9 +20,9 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @GetMapping
-    public List<CityResponse> getCountries() {
-        return cityService.findAll();
+    @GetMapping("/{id}")
+    public CityResponse getCity(@PathVariable("id") Long id) {
+        return cityService.getCity(id);
     }
 
     @PostMapping

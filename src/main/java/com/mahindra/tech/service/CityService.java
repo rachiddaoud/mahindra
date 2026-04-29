@@ -49,4 +49,8 @@ public class CityService {
         return cityRepository.findByCountryId(countryId, pageable)
                 .map(this::mapToResponse);
     }
+
+    public CityResponse getCity(Long id) {
+        return mapToResponse(cityRepository.findById(id).orElseThrow(() -> new RuntimeException("City not found")));
+    }
 }
