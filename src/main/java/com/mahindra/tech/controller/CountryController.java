@@ -5,6 +5,8 @@ import com.mahindra.tech.dto.CountryRequest;
 import com.mahindra.tech.dto.CountryResponse;
 import com.mahindra.tech.service.CityService;
 import com.mahindra.tech.service.CountryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,7 @@ public class CountryController {
     }
 
     @GetMapping("/{countryId}/cities")
-    public List<CityResponse> getCities(@PathVariable("countryId") Long countryId) {
-        return cityService.getCitiesByCountry(countryId);
+    public Page<CityResponse> getCities(@PathVariable("countryId") Long countryId, Pageable pageable) {
+        return cityService.getCitiesByCountry(countryId, pageable);
     }
 }

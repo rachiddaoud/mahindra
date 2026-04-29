@@ -6,6 +6,8 @@ import com.mahindra.tech.entities.City;
 import com.mahindra.tech.entities.Country;
 import com.mahindra.tech.repositories.CityRepository;
 import com.mahindra.tech.repositories.CountryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,10 +45,8 @@ public class CityService {
         );
     }
 
-    public List<CityResponse> getCitiesByCountry(Long countryId) {
-        return cityRepository.findByCountryId(countryId)
-                .stream()
-                .map(this::mapToResponse)
-                .toList();
+    public Page<CityResponse> getCitiesByCountry(Long countryId, Pageable pageable) {
+        return cityRepository.findByCountryId(countryId, pageable)
+                .map(this::mapToResponse);
     }
 }
